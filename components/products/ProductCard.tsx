@@ -1,6 +1,7 @@
 import { Product } from "@/src/schemas";
 import { formatCurrency } from "@/src/utils";
 import Image from "next/image";
+import AddProductButton from "./AddProductButton";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -19,23 +20,10 @@ export default function ProductCard({ product }: { product: Product }) {
             {formatCurrency(product.price)}
           </p>
         </div>
+        <AddProductButton 
+          product={product}
+        />
       </div>
-      <button type="button" className="absolute top-5 -right-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-8 h-8 bg-indigo-600 rounded-full text-white"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      </button>
     </div>
   );
 }
