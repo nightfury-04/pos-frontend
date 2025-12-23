@@ -4,6 +4,7 @@ import { useStore } from "@/src/store";
 import ShoppingCartItem from "./ShoppingCarItem";
 import Amount from "./Amount";
 import CouponForm from "./CouponForm";
+import SubmitOrderForm from "./SubmitOrderForm";
 
 export default function ShoppingCart() {
   const contents = useStore((state) => state.contents);
@@ -32,6 +33,7 @@ export default function ShoppingCart() {
           </dl>
 
           <CouponForm />
+          <SubmitOrderForm />
         </>
       ) : (
         <p className="text-xl text-center text-gray-900">
