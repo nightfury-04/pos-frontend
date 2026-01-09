@@ -1,5 +1,5 @@
 import { CarItem } from "@/src/schemas";
-import { formatCurrency } from "@/src/utils";
+import { formatCurrency, getImagePath } from "@/src/utils";
 import { useStore } from "@/src/store";
 
 export default function ShoppingCartItem({ item }: { item: CarItem }) {
@@ -10,7 +10,7 @@ export default function ShoppingCartItem({ item }: { item: CarItem }) {
     <li className="flex items-center space-x-6 py-6 relative">
       <div className="h-24 w-24">
         <img
-          src={`${process.env.NEXT_PUBLIC_API_URL}/img/${item.image}`}
+          src={getImagePath(item.image)}
           alt={`Imagen del producto ${item.name}`}
           width={100}
           height={100}
@@ -33,7 +33,7 @@ export default function ShoppingCartItem({ item }: { item: CarItem }) {
           )}
         </select>
       </div>
-      <div className="absolute top-10 -right-0">
+      <div className="absolute top-10 right-0">
         <button type="button" onClick={() => removeFromCart(item.productId)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

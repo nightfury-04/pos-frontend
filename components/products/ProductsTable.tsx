@@ -1,5 +1,5 @@
 import { Product } from "@/src/schemas";
-import { formatCurrency } from "@/src/utils";
+import { formatCurrency, getImagePath, isAvailable } from "@/src/utils";
 import Link from "next/link";
 import DeleteProductForm from "./DeleteProductForm";
 
@@ -47,7 +47,7 @@ export default function ProductsTable({ products }: { products: Product[] }) {
                   <tr key={product.id}>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <img
-                        src={`${process.env.API_URL}/img/${product.image}`}
+                        src={getImagePath(product.image)}
                         alt={`Imagen del Producto ${product.name}`}
                         width={120}
                         height={120}
@@ -60,7 +60,13 @@ export default function ProductsTable({ products }: { products: Product[] }) {
                       {formatCurrency(product.price)}
                     </td>
                     <td className="px-3 py-4 text-sm text-gray-500">
-                      {product.inventory}
+                      {isAvailable(product.inventory) ? (
+                        product.inventory
+                      ) : (
+                        <p className="bg-red-600 rounded-lg px-3 py-1 text-white text-center text-sm uppercase font-bold">
+                          Agotado
+                        </p>
+                      )}
                     </td>
                     <td className="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 ">
                       <div className="flex gap-5 justify-end items-center">
@@ -71,9 +77,7 @@ export default function ProductsTable({ products }: { products: Product[] }) {
                           Editar <span className="sr-only">{product.name}</span>
                         </Link>
 
-                        <DeleteProductForm 
-                          productId={product.id}
-                        />
+                        <DeleteProductForm productId={product.id} />
                       </div>
                     </td>
                   </tr>
